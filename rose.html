@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rose Day 🌹</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            padding: 18px;
+            overflow-x: hidden;
+        }
+
+        /* Floating Roses */
+        .rose-bg span {
+            position: fixed;
+            bottom: -40px;
+            font-size: 18px;
+            animation: float 10s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .rose-box {
+            margin: 25px 0 10px;
+            text-align: center;
+        }
+
+        .rose-box img {
+            border-radius: 25px;
+            width: 160px;
+            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.3));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .note {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 16px;
+            border-radius: 16px;
+            margin-top: 20px;
+            max-width: 420px;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .memories {
+            margin-top: 25px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .memories h2 {
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* BUTTON AREA */
+        .btn-area {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            position: relative;
+        }
+
+        button {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .accept {
+            background: #fff;
+            color: #ff4d6d;
+            transform: scale(1);
+            width: 40vw;
+        }
+
+        .reject {
+            background: rgba(0, 0, 0, 0.25);
+            color: #fff;
+        }
+
+        /* POPUPS */
+        .popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            padding: 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .popup.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-box {
+            background: #fff;
+            color: #ff4d6d;
+            padding: 22px 18px;
+            border-radius: 18px;
+            font-weight: 600;
+            max-width: 260px;
+        }
+
+        .popup-box button {
+            margin-top: 12px;
+            background: #ff4d6d;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* 🌹 Shayari Audio Box */
+        .shayari-audio-box {
+            margin: 30px 15px;
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Heading */
+        .shayari-audio-box h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #b30059;
+        }
+
+        /* Shayari text */
+        .shayari-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* Play button */
+        .play-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            background: #ff4d6d;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .play-btn:hover {
+            background: #e6004c;
+            transform: scale(1.05);
+        }
+
+        /* Fade animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Roses -->
+    <div class="rose-bg">
+        <span style="left:10%; animation-duration: 4s;">🌹</span>
+        <span style="left:30%; animation-duration: 6s;">🌹</span>
+        <span style="left:50%; animation-duration: 9s;">🌹</span>
+        <span style="left:70%; animation-duration: 6s;">🌹</span>
+        <span style="left:90%; animation-duration: 10s;">🌹</span>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <!-- Yaha uska naam likh -->
+        <h1>Happy Rose Day, Meri Mohabbat 🌹</h1>
+
+        <p>A rose for the girl who made my life Like Rose (Matlab Khubsurat bhi, khubudar bhi, Pyaara bhi, Aur Kanto
+            bhara bhi 😁😁 ) ❤️</p>
+    </header>
+
+    <!-- ROSE IMAGE -->
+    <div class="rose-box">
+        <!-- Rose image link change kar -->
+        <img src="rose.jpeg" alt="Rose">
+    </div>
+
+    <!-- NOTE -->
+    <div class="note">
+        <!-- Apna message likh -->
+        You are the Rose <br>In The Garden of My Heart<br>
+        Since you came into my life, everything feels more colourful, more peaceful, and more meaningful. 🌸
+
+    </div>
+
+    <!-- MEMORIES -->
+    <section class="memories">
+        <h2>Rose Memories 🌹</h2>
+
+        <div class="memory-card">First time I called you Cute 🌸</div>
+        <div class="memory-card">When you sent me your smiling pic ❤️</div>
+        <div class="memory-card">When you got angry but still cared 🥺</div>
+        <div class="memory-card">Every good morning text from you ☀️</div>
+    </section>
+
+    <!-- 🌹 SHAYARI AUDIO SECTION START -->
+    <div class="shayari-audio-box">
+
+        <!-- 💬 Heading (Edit text if you want) -->
+        <h2>🌹 A Rose With My Shayari 🌹</h2>
+
+        <!-- 🔊 Audio Player -->
+        <!-- AUDIO FILE LINK yaha add kar -->
+        <audio id="shayariAudio" src="audiooo.aac"></audio>
+
+        <!-- ▶️ Play Button -->
+        <button onclick="playShayari()" class="play-btn">
+            ▶️ Play My Voice
+        </button>
+
+    </div>
+    <!-- 🌹 SHAYARI AUDIO SECTION END -->
+
+
+    <!-- BUTTONS -->
+    <div class="btn-area">
+
+        <button class="accept" id="acceptBtn" onclick="acceptRose()">
+            Accept 🌹
+        </button>
+
+        <button class="reject" onclick="rejectRose()">
+            Reject 🙈
+        </button>
+
+    </div>
+
+    <!-- ACCEPT POPUP -->
+    <div class="popup" id="acceptPopup">
+        <div class="popup-box">
+            Yayyy! You accepted my rose ❤️🌹
+            ummmmmaaaaaaaahhhhh 💋💋💋💋💋💋
+
+            <br>
+            <button onclick="closePopup('acceptPopup')">Awww ❤️</button>
+        </div>
+    </div>
+
+    <!-- REJECT POPUP -->
+    <div class="popup" id="rejectPopup">
+        <div class="popup-box">
+            Mera Rose Reject nhi krona 🥺🌹
+            <br>
+            <button onclick="closePopup('rejectPopup')">Retry 😌</button>
+        </div>
+    </div>
+
+    <script>
+        let rejectCount = 0;
+
+        function acceptRose() {
+            document.getElementById('acceptPopup').classList.add('show');
+        }
+
+        function rejectRose() {
+            rejectCount++;
+
+            // Show reject popup
+            document.getElementById('rejectPopup').classList.add('show');
+
+            let acceptBtn = document.getElementById('acceptBtn');
+
+            // Increase size every click
+            let scale = 1 + (rejectCount * 0.4);
+            acceptBtn.style.transform = `scale(${scale})`;
+
+            // 3rd click overlap
+            if (rejectCount >= 3) {
+                acceptBtn.style.position = 'absolute';
+                acceptBtn.style.zIndex = '5';
+                acceptBtn.style.left = '50%';
+                acceptBtn.style.transform = 'translateX(-50%) scale(2.2)';
+            }
+        }
+
+        // CLOSE POPUP FUNCTION
+        function closePopup(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function playShayari() {
+            const audio = document.getElementById("shayariAudio");
+            audio.play();
+        }
+    </script>
+
+</body>
+
+</html>
