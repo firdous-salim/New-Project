@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chocolate Day 🍫</title>
+
+  <!-- 🍫 Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:linear-gradient(135deg,#3e1f0d,#a0522d);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* 🍫 MAIN CARD */
+    .choco-card{
+      width:100%;
+      max-width:420px; /* 📱 Mobile Focus */
+      background:#5c2c0c;
+      border-radius:25px;
+      padding:25px 20px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.4);
+      animation:fadeIn 1.3s ease;
+      position:relative;
+    }
+
+    /* 🍫 Heading */
+    h1{
+      font-size:24px;
+      margin-bottom:10px;
+      color:#ffd1a3;
+    }
+
+    /* 💬 Message */
+    .msg{
+      font-size:15px;
+      line-height:1.6;
+      margin-bottom:20px;
+      color:#ffe6cc;
+    }
+
+    /* 📸 Photo */
+    .couple-img{
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      object-fit:cover;
+      border:4px solid #ffb366;
+      margin-bottom:15px;
+    }
+
+    /* 🍫 Chocolate Image */
+    .choco-img{
+      width:120px;
+      margin:10px 0 20px;
+      animation:float 2.5s infinite ease-in-out;
+    }
+
+    /* 🍬 Chocolate Buttons */
+    .btn-box{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      padding:10px 16px;
+      border:none;
+      border-radius:25px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .eat-btn{
+      background:#ff9933;
+      color:white;
+    }
+
+    .share-btn{
+      background:#ffd1a3;
+      color:#5c2c0c;
+    }
+
+    button:hover{
+      transform:scale(1.08);
+    }
+
+    /* 🍫 Chocolate Rain */
+    .choco{
+      position:fixed;
+      top:-50px;
+      font-size:22px;
+      animation:fall linear infinite;
+    }
+
+    @keyframes fall{
+      to{
+        transform:translateY(110vh);
+      }
+    }
+
+    /* 💬 Popup */
+    .popup{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,.6);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .popup-box{
+      background:white;
+      color:#5c2c0c;
+      padding:25px 20px;
+      border-radius:20px;
+      text-align:center;
+      max-width:320px;
+      animation:fadeIn .6s ease;
+    }
+
+    .close-btn{
+      margin-top:15px;
+      background:#ff9933;
+      color:white;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(30px);} 
+      to{opacity:1;transform:translateY(0);} 
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0);} 
+      50%{transform:translateY(-10px);} 
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 🍫 CHOCOLATE CARD START -->
+  <div class="choco-card">
+
+    <!-- ❤️ Her Name Edit -->
+    <h1>Happy Chocolate Day 🍫❤️</h1>
+
+    <!-- 📸 Couple Photo (Change link) -->
+    <img src="apnn.jpeg" class="couple-img">
+
+    <!-- 🍫 Chocolate Image (Change if you want) -->
+    <img src="ccc.png" class="choco-img">
+
+    <!-- 💬 Message Edit -->
+    <p class="msg">
+      Just like chocolate… you make my life sweet 🍫❤️<br><br>
+      <!-- ✏️ Apna message add kar -->
+      Meetha Intezar aur intezaar se bhi meetha ishq tumhara <br>Meetha yaar aur yaar se bhi Meetha ye Pyaar humara 😘
+    </p>
+
+    <!-- 🍬 Buttons -->
+    <div class="btn-box">
+      <button class="eat-btn" onclick="eatChoco()">Eat Together 🍫</button>
+      <button class="share-btn" onclick="shareLove()">Share Love 💕</button>
+    </div>
+
+  </div>
+  <!-- 🍫 CHOCOLATE CARD END -->
+
+
+  <!-- 💬 POPUP -->
+  <div class="popup" id="popup">
+    <div class="popup-box">
+      <h2>So Sweet, Like You 😘🍫</h2>
+
+      <!-- ✏️ Popup message edit -->
+      <p>You + Me + Chocolate = Sweetest Moment Ever ❤️</p>
+
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+
+  <script>
+
+    /* 🍫 Chocolate Rain Generator */
+    function createChoco(){
+      const choco = document.createElement('div');
+      choco.classList.add('choco');
+      choco.innerHTML = '🍫';
+      choco.style.left = Math.random()*100 + 'vw';
+      choco.style.animationDuration = (Math.random()*3+2)+'s';
+      document.body.appendChild(choco);
+
+      setTimeout(()=>{
+        choco.remove();
+      },5000);
+    }
+
+    setInterval(createChoco,700);
+
+
+    /* 🍬 Buttons */
+    function eatChoco(){
+      document.getElementById('popup').style.display='flex';
+    }
+
+    function shareLove(){
+      document.getElementById('popup').style.display='flex';
+    }
+
+    function closePopup(){
+      document.getElementById('popup').style.display='none';
+    }
+
+  </script>
+
+
+
+  <!-- 🍫 SWEETNESS METER -->
+  <div style="
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:white;
+    color:#5c2c0c;
+    padding:10px 14px;
+    border-radius:20px;
+    font-size:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  ">
+    Sweetness Level 🍫: <span id="sweetLevel">0</span>%
+  </div>
+
+
+  <!-- 🍬 UNWRAP CHOCOLATE GAME -->
+  <div id="unwrapBox" style="
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    cursor:pointer;
+  ">
+    
+    <!-- 🍫 Chocolate Image Change if you want -->
+    <img id="unwrapChoco" 
+         src="cchoo-removebg-preview.png" 
+         width="60">
+
+    <p style="font-size:11px;margin-top:4px;">Tap to unwrap 🍬</p>
+  </div>
+
+
+  <!-- 💌 SECRET SWEET MESSAGE -->
+  <div id="secretSweet" style="
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    color:#5c2c0c;
+    padding:20px 22px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,0.3);
+    max-width:280px;
+  ">
+
+    <!-- ✏️ SECRET MESSAGE EDIT -->
+    You Unwraped My Heart🍫❤️ and Also Body 🙈
+
+    <br><br>
+    <button onclick="closeSecret()" 
+      style="
+        padding:8px 14px;
+        border:none;
+        border-radius:20px;
+        background:#ff9933;
+        color:white;
+      ">
+      Close 💕
+    </button>
+
+  </div>
+
+
+  <script>
+
+    /* 🍫 SWEETNESS + UNWRAP SYSTEM */
+    let sweet = 0;
+
+    document.getElementById('unwrapBox').addEventListener('click',()=>{
+      if(sweet < 100){
+        sweet += 10;
+        document.getElementById('sweetLevel').innerText = sweet;
+      }
+
+      /* 💌 Unlock secret at 100% */
+      if(sweet === 100){
+        document.getElementById('secretSweet').style.display='block';
+      }
+    });
+
+    function closeSecret(){
+      document.getElementById('secretSweet').style.display='none';
+    }
+
+  </script>
+
+</body>
+</html>

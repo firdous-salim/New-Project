@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teddy Day 🧸</title>
+
+  <!-- 🧸 Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:linear-gradient(135deg,#ffd6e0,#ffe9f0);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      overflow-x:hidden;
+    }
+
+    /* 🧸 MAIN CARD */
+    .teddy-card{
+      width:100%;
+      max-width:420px; /* 📱 Mobile Focus */
+      background:white;
+      border-radius:25px;
+      padding:25px 20px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.15);
+      animation:fadeIn 1.2s ease;
+      position:relative;
+    }
+
+    /* 🧸 Heading */
+    h1{
+      font-size:24px;
+      color:#ff4d88;
+      margin-bottom:10px;
+    }
+
+    /* 💬 Message */
+    .msg{
+      font-size:15px;
+      color:#555;
+      line-height:1.6;
+      margin-bottom:18px;
+    }
+
+    /* 📸 Photo */
+    .couple-img{
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      object-fit:cover;
+      border:4px solid #ff99bb;
+      margin-bottom:15px;
+    }
+
+    /* 🧸 Teddy Image */
+    .teddy-img{
+      width:140px;
+      margin:10px 0 18px;
+      animation:float 2.5s infinite ease-in-out;
+    }
+
+    /* 🤗 Hug Button */
+    .hug-btn{
+      padding:11px 18px;
+      border:none;
+      border-radius:25px;
+      background:#ff4d88;
+      color:white;
+      font-size:14px;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .hug-btn:hover{
+      transform:scale(1.08);
+    }
+
+    /* 🧸 Teddy Rain */
+    .teddy{
+      position:fixed;
+      top:-50px;
+      font-size:22px;
+      animation:fall linear infinite;
+    }
+
+    @keyframes fall{
+      to{transform:translateY(110vh);} 
+    }
+
+    /* 💬 Popup */
+    .popup{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,.6);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .popup-box{
+      background:white;
+      padding:25px 20px;
+      border-radius:20px;
+      text-align:center;
+      max-width:300px;
+      animation:fadeIn .6s ease;
+    }
+
+    .close-btn{
+      margin-top:15px;
+      background:#ff4d88;
+      color:white;
+      border:none;
+      padding:8px 14px;
+      border-radius:20px;
+    }
+
+    /* ✨ Animations */
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(30px);} 
+      to{opacity:1;transform:translateY(0);} 
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0);} 
+      50%{transform:translateY(-12px);} 
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 🧸 TEDDY CARD START -->
+  <div class="teddy-card">
+
+    <!-- ❤️ Her Name Edit -->
+    <h1>Happy Teddy Day 🧸❤️</h1>
+
+    <!-- 📸 Couple Photo Change -->
+    <img src="ted.jpeg" class="couple-img">
+
+    <!-- 🧸 Teddy Image Change -->
+    <img src="bunny-removebg-preview.png" class="teddy-img">
+
+    <!-- 💬 Message Edit -->
+    <p class="msg">
+      Just like this teddy… I want to hug you forever 🧸❤️<br><br>
+      <!-- ✏️ Apna message add kar -->
+      Tumse Kitni Mohabbat hai ye tb Jana maine
+      <br>Jab tere Bina Jine ka Tasavvur kiya Maine <br><br>
+       Agr Apki Ijazat ho to kya mai is teddy day pr <br>
+       Aapka teddy Ban Jau
+       But Mujhe Hug krna hoga
+    </p>
+
+    <!-- 🤗 Hug Button -->
+    <button class="hug-btn" onclick="sendHug()">Send Hug 🤗</button>
+
+  </div>
+  <!-- 🧸 TEDDY CARD END -->
+
+
+  <!-- 💬 POPUP -->
+  <div class="popup" id="popup">
+    <div class="popup-box">
+      <h2>Hug Delivered 🤗❤️</h2>
+
+      <!-- ✏️ Popup text edit -->
+      <p>A tight teddy hug from me to my jaan 🧸💞</p>
+
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+
+  <script>
+
+    /* 🧸 Teddy Rain */
+    function createTeddy(){
+      const teddy=document.createElement('div');
+      teddy.classList.add('teddy');
+      teddy.innerHTML='🧸';
+      teddy.style.left=Math.random()*100+'vw';
+      teddy.style.animationDuration=(Math.random()*3+2)+'s';
+      document.body.appendChild(teddy);
+
+      setTimeout(()=>{teddy.remove();},5000);
+    }
+
+    setInterval(createTeddy,800);
+
+
+    /* 🤗 Hug System */
+    function sendHug(){
+      document.getElementById('popup').style.display='flex';
+    }
+
+    function closePopup(){
+      document.getElementById('popup').style.display='none';
+    }
+
+  </script>
+
+
+
+  <!-- 💗 HUG POWER METER -->
+  <div style="
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:white;
+    padding:10px 14px;
+    border-radius:20px;
+    font-size:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  ">
+    Hug Power 🤗: <span id="hugPower">0</span>%
+  </div>
+
+
+  <!-- 💞 HEART BURST CONTAINER -->
+  <div id="heartBurst"></div>
+
+
+  <script>
+
+    /* 🤗 LONG PRESS HUG SYSTEM */
+    let power = 0;
+    let holdInterval;
+    const btn = document.querySelector('.hug-btn');
+
+    btn.addEventListener('touchstart', startHold);
+    btn.addEventListener('mousedown', startHold);
+
+    btn.addEventListener('touchend', stopHold);
+    btn.addEventListener('mouseup', stopHold);
+
+    function startHold(){
+      holdInterval = setInterval(()=>{
+        if(power < 100){
+          power += 2;
+          document.getElementById('hugPower').innerText = power;
+        }
+
+        if(power >= 100){
+          stopHold();
+          heartExplosion();
+        }
+      },80);
+    }
+
+    function stopHold(){
+      clearInterval(holdInterval);
+    }
+
+
+    /* 💞 HEART EXPLOSION */
+    function heartExplosion(){
+      for(let i=0;i<25;i++){
+        const heart=document.createElement('div');
+        heart.innerHTML='💖';
+        heart.style.position='fixed';
+        heart.style.left='50%';
+        heart.style.top='60%';
+        heart.style.fontSize='20px';
+        heart.style.transform=`translate(-50%,-50%)`;
+        heart.style.animation=`burst 1s ease forwards`;
+        heart.style.setProperty('--x',(Math.random()*200-100)+'px');
+        heart.style.setProperty('--y',(Math.random()*200-100)+'px');
+        document.body.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),1000);
+      }
+    }
+
+  </script>
+
+
+  <!-- 💞 HEART BURST ANIMATION -->
+  <style>
+    @keyframes burst{
+      to{
+        transform:translate(var(--x),var(--y));
+        opacity:0;
+      }
+    }
+  </style>
+
+</body>
+</html>
